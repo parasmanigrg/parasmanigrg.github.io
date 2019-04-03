@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <!-- Include meta tag to ensure proper rendering and touch zooming -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- geting the css styles from the themes folder -->
+
+  <link rel="stylesheet" href="css/themes/cwthemes.css" />
+	<link rel="stylesheet" href="css/themes/jquery.mobile.icons.min.css" />
+    
+    <!--  jQuery Mobile stylesheets -->
+<!--    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">-->
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile.structure-1.4.5.min.css" >
+
+	<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    
+<!--    <link rel="stylesheet" href="css/jquerymob_1.4.5.css" />-->
+	<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script> 
+  
+    
+    <script type="text/javascript" src="cordova.js"></script>
+    
+       <script type="text/javascript" src="js/dbhandler.js"></script>
+    <script type="text/javascript" src="js/rvhandler.js"></script>  
+        <script type="text/javascript" src="js/index.js"></script>
+     
+    <script type="text/javascript">
+       
+    </script>
+    
+    <title>logbook2</title>
+   
+    </head>
+    <style>
+        b2{
+            color: blue;
+        }
+        
+        b3{
+        color:goldenrod; font-size:10;     
+            
+        }
+        
+        h2{
+            color: black;
+        }
+        }
+        span{
+             color: darkgreen;;
+        }
+        
+        div.a {
+        text-align: center;
+}
+    
+     
+    </style>
+  
+    
+    
+    <body >
+        
+
+
+ <!-- creating Home Page -->
+        <div data-role="page" class="a" id="home" data-theme="b"> 
+   
+     <div data-role="panel" id= "homepanel" data-theme="b">
+          <!-- creating the Menu panel  -->
+     <h1>Menu</h1>
+         <ul data-role="listview" data-insert="true">
+         <li data-role="list-divider">Rating</li>
+             <li data-icon="home"><a href="#home">Home Page</a></li>
+             <li data-icon="plus"><a href="#addrat">Give Rating</a></li>
+             <li data-icon="grid"><a href="#loadrat">View Ratings</a></li>
+         </ul>
+     </div> 
+    
+            
+    <div data-role="header" data-position="fixed">
+         <a href= "#homepanel"
+           class="ui-btn ui-icon-home ui-btn-icon-left"></a>
+        <h1>Home</h1>
+        </div> 
+          <div data-role="main" data-theme="b" class="ui-content" >
+               <div class="w3-container w3-center w3-animate-top">
+              <h2>Irating App </h2>
+              <b2> Place to View Restaurant Rating and Add Rating </b2>
+              </div>
+              <p>
+              <img class="w3-animate-fading" src="img/rest.jpg" alt="Simply Easy Learning" class="a" style="width:100%">
+              </p> 
+              <a class="ui-btn ui-icon-plus ui-btn-icon-left ui-btn-inline" href="#addrat" >Give Rating</a> 
+              <a class="ui-btn ui-icon-grid ui-btn-icon-left ui-btn-inline" href="#loadrat" >View Ratings</a>
+              </div>
+            
+            
+            <div align="center" data-role="footer" data-position="fixed" >
+        <hi>IRATING</hi>
+        </div>
+         </div>
+        
+        
+        
+        
+        
+         <!-- creating the Add Review Page  -->
+          <div data-role="page" id="addrat" data-theme="b">
+         <div data-role="panel" id= "addratpanel">
+     <h1>Menu</h1>
+         <ul data-role="listview" data-insert="true">
+         <li data-role="list-divider">Rating</li>
+             <li data-icon="home"><a href="#home">Home Page</a></li>
+             <li data-icon="plus"><a href="#addrat">Give Rating</a></li>
+             <li data-icon="grid"><a href="#loadrat">View Ratings</a></li>
+         </ul>
+     </div>
+        
+    <div data-role="header" data-position="fixed">
+   
+     <!-- add the menu tab in the header of the page -->
+     <a href= "#addratpanel"
+           class="ui-btn ui-icon-bars ui-btn-icon-notext ui-corner-all ui-shadow"></a>
+    
+        <!-- building in the feedback adding form -->
+   
+        <h1> Give Feedback</h1>
+      </div>
+      <fieldset>
+        <h1>Feedback Form</h1>
+        
+        <div data-role="main" class="ui-content">
+        <p>
+          <b>Restaurant Name*</b><br>
+          <form id="dataform" onsubmit="AddReview(); ">
+<input type = "text" required 
+                 id = "ReName"
+       pattern="[a-zA-Z\s]+" minlength="3" maxlength="20"
+        placeholder="Name of the restaurant you went"         
+       value = ""   >
+        <p>
+            
+          <b>Restaurant Type*</b><br>
+            
+            <select id="restype" >
+  <option value="Fast Food">Fast Food</option>
+  <option value="Casual Dine">Casual Dine</option>
+  <option value="Fine Dine">Fine Dine</option>
+  <option value="Buffet">Buffet</option>
+ <option value="Kebab">Kebab</option>
+  <option value="Cafe/Bistro">Cafe/Bistro</option>
+                <option value="Others">Others</option>
+</select>
+        </p>
+        
+              <p>
+          <b>Date and Time of Visit*</b><br>
+            
+          <input type="datetime-local" required id="start" name="date"
+                 
+       value="yyyy-mm-dd"
+       min="2000-01-01" max="2020-12-31">
+             <span> </span>
+        </p>  
+               
+          <p>
+          <b> Average Meal Price per Person £*</b><br>
+            
+          <input type = "text" required
+                  id = "price"
+                 pattern="[0-9]{3}.[0-9]{2}"
+                  value = "" 
+                   placeholder="how much you paid for your meal"
+                 size ="35"/>
+              <span >Format: 120.45 OR  043.00 </span>
+        <br>
+          <br>
+          
+               <fieldset data-role="controlgroup"  data-iconpos="right">
+        <b>Service Rating*:</b>
+<!--  hiddien text to get the service rating value-->
+                   <input type="hidden" id="ser">
+       
+                   
+        <input type="radio" required name="service"    
+      id= "ser0" value="2"  onclick="RService(this.value);avgrate();">
+              <label for="ser0">Need to Improve</label> 
+                   
+                   <input type="radio" name="service" 
+                      id="s1" value="3" onclick="RService(this.value);avgrate();">
+                   <label for="s1">Okay</label> 
+              <input type="radio" name="service" 
+                      id="s2" value="4" onclick="RService(this.value);avgrate();">
+                   <label for="s2">Good</label> 
+              <input type="radio" name="service" 
+                      id="s3" value="5" onclick="RService(this.value);avgrate();">
+                   <label for="s3">Excellent</label> 
+                   
+    </fieldset>
+              <br> 
+                    
+               <fieldset data-role="controlgroup"  data-iconpos="right">
+        <b>Cleanliness Rating*:</b>
+                   <input type="hidden" id="clean">
+       <!--    hiddien text to get the cleanliness rating value-->
+                   
+        <input type="radio" required name="cleanr"    
+      id= "c0" value="2"  onclick="RClean(this.value);avgrate();">
+              <label for="c0">Need to Improve</label> 
+                   
+                   <input type="radio"  name="cleanr" 
+                      id="c1" value="3" onclick="RClean(this.value);avgrate();">
+                   <label for="c1">Okay</label> 
+              <input type="radio" name="cleanr" 
+                      id="c2" value="4" onclick="RClean(this.value);avgrate();">
+                   <label for="c2">Good</label> 
+              <input type="radio" name="cleanr" 
+                      id="c3" value="5" onclick="RClean(this.value);avgrate();">
+                   <label for="c3">Excellent</label> 
+                   
+    </fieldset>
+        
+          <br>
+          <fieldset data-role="controlgroup"   data-iconpos="right" >
+        <b>Food Quality Rating*:</b>
+                   <input type="hidden" id="quality">
+       
+  <!--    hiddien text to get the quality rating value-->
+        <input type="radio" required name="food"    
+      id= "f0" value="2"  onclick="RQuality(this.value);avgrate();">
+              <label for="f0">Need to Improve</label> 
+                   
+                   <input type="radio" name="food" 
+                      id="f1" value="3" onclick="RQuality(this.value);avgrate();">
+                   <label for="f1">Okay</label> 
+              <input type="radio" name="food" 
+                      id="f2" value="4" onclick="RQuality(this.value);avgrate();">
+                   <label for="f2">Good</label> 
+              <input type="radio" name="food" 
+                      id="f3" value="5" onclick="RQuality(this.value);avgrate();">
+                   <label for="f3">Excellent</label> 
+                   
+    </fieldset>
+      <br> 
+        <p>
+          <b>Additonal Note</b><br>
+            
+          <textarea id = "note" 
+                  rows = "15"
+                  cols = "90">
+            </textarea>
+        </p>
+          <p>
+          <b>Your Good Name*</b><br>
+            
+          <input type = "text" onclick="avgrate();" required
+                  id = "reperson" 
+                   pattern="[a-zA-Z\s]+" minlength="3" maxlength="20"
+                 placeholder="input your name here"
+                  value = "" 
+                 > <span> </span>
+        </p>
+              <input type="hidden" id="average"/>
+              
+           <p> <input type="submit" value="ADD" /><br>
+           
+              </p> 
+            </form>  
+           
+          <button onclick="redo();">REDO</button><br>
+              
+                 <button id="takepic">Take Photo</button>
+            <img id="camera">
+          </div>
+      </fieldset>
+  
+          
+     <div data-role="footer" data-position="fixed">
+     <h1>IRATING</h1>
+     </div>
+   
+    </div> 
+         
+    
+        
+        
+        
+        
+       <!-- creating the Load Rating Page  -->
+     <div data-role="page" data-theme="a" id="loadrat" >
+         <div data-role="panel" data-theme="b" id= "LoadRat">
+     <h1>Menu</h1>
+         <ul data-role="listview" data-insert="true">
+         <li data-role="list-divider">Rating</li>
+             <li data-icon="home"><a href="#home">Home Page</a></li>
+             <li data-icon="plus"><a href="#addrat">Give Rating</a></li>
+             <li data-icon="grid"><a href="#loadrat"onClick="document.location.reload(true)">View Ratings</a></li>
+         </ul>
+     </div>
+    <div data-role="header" data-position="fixed">
+        <!-- add the menu tab in the header of the page -->
+        <a href= "#LoadRat"
+           class="ui-btn ui-icon-bars ui-btn-icon-notext ui-corner-all ui-shadow"></a>
+        <h1>Ratings</h1>
+        </div>
+          <div data-role="main" class="ui-content">
+            <form class="ui-filterable">
+             <!-- add search bar -->
+                <input data-type="search" id="searchkey"/> 
+            
+            </form>
+              <ul data-role="listview" data-filter="true" data-input="#searchkey"
+                data-inset="true"
+                id="crate">
+                  
+              </ul>
+              
+              
+              
+              
+              
+              
+              
+             <!--  creating popup   -->
+          <div data-role="popup" id="popupUpdateDelete" data-theme="b">
+              <div data-role="header">
+              <a class="ui-btn ui-icon-delete ui-btn-icon-notext ui-corner-all" data-rel="back"></a>
+             <h1>Options</h1>
+              </div>
+              <div data-role="main" class="ui-content">
+                  <a class="ui-btn ui-icon-delete ui-btn-icon-left ui-btn-inline" onclick="deleteReview()">Delete</a>
+                  <a class="ui-btn ui-icon-edit ui-btn-icon-left ui-btn-inline" href="#updatedl" >Update</a>
+              </div>
+         </div> 
+        </div>
+          
+        <div align="center" data-role="footer" data-position="fixed" >
+        <hi>IRating</hi>
+        </div>
+         </div> 
+        
+        
+        
+        
+        
+        
+        
+        <!-- Update dialog box     -->
+         <div data-role="dialog" data-theme="b" id="updatedl">
+         <div data-role="header">
+             <h1>Update Rating</h1>
+             </div>
+             <div>
+             <div data-role="main" class="ui-content">
+             
+                 <!-- building update form  -->
+                 
+                 
+                 
+                 
+                
+                <form id="dataform" onsubmit=" updateReview();">
+                    <b>Restaurant Name*</b>
+<input type = "text" required
+                 id = "UReName"
+       pattern="[a-zA-Z\s]+" minlength="3" maxlength="20"
+        placeholder="Name of the restaurant you went"         
+       value = "" 
+                  >
+              <span> </span>
+      
+        <p>
+          <b>Restaurant Type*</b><br>
+            
+             <select id="Urestype">
+  <option value="Fast Food">Fast Food</option>
+  <option value="Casual Dine">Casual Dine</option>
+  <option value="Fine Dine">Fine Dine</option>
+  <option value="Buffet">Buffet</option>
+ <option value="Kebab">Kebab</option>
+  <option value="Cafe/Bistro">Cafe/Bistro</option>
+                <option value="Others">Others</option>
+</select>
+          
+        </p>
+        <p>
+          <b>Date and Time of Visit*</b><br>
+            
+          <input type="datetime-local" required id="Ustart" name="date"
+                 
+       value="yyyy-mm-dd"
+       min="2000-01-01" max="2020-12-31">
+             <span> </span>
+        </p>  
+          <br>
+              <br>
+          <p>
+          <b> Averae Meal Price per Person*</b><br>
+            
+         £ <input type = "text" required
+                  id = "Uprice"
+                 pattern="[0-9]{3}.[0-9]{2}"
+                  value = "" 
+                   placeholder="how much you paid for your meal"
+                 size ="35"/>
+              <span >Format: 120.45 OR  043.00 </span>
+        <br><br>
+          
+          
+               <fieldset data-role="controlgroup"  data-iconpos="right"   >
+        <b>Service Rating*:</b>
+                   <input type="hidden" id="Udser">
+       
+                   
+        <input type="radio" required name="Udservice"    
+      id= "0" value="2"  onclick="URService(this.value);UpRate();">
+              <label for="0">Need to Improve</label> 
+                   
+                   <input type="radio" name="Udservice" 
+                      id="1" value="3" onclick="URService(this.value);UpRate();">
+                   <label for="1">Okay</label> 
+              <input type="radio" name="Udservice" 
+                      id="2" value="4" onclick="URService(this.value);UpRate();">
+                   <label for="2">Good</label> 
+              <input type="radio" name="Udservice" 
+                      id="3" value="5" onclick="URService(this.value);UpRate();">
+                   <label for="3">Excellent</label> 
+                   
+    </fieldset>
+              <br> <br>
+                    
+               <fieldset data-role="controlgroup" data-iconpos="right"    >
+        <b>Cleanliness Rating*:</b>
+                   <input type="hidden" id="Uclean">
+       
+                   
+        <input type="radio" required name="Ucleanr"   
+      id= "uc0" value="2"  onclick="URClean(this.value);UpRate();">
+              <label for="uc0">Need to Improve</label> 
+                   
+                   <input type="radio"  name="Ucleanr" 
+                      id="uc1" value="3" onclick="URClean(this.value);UpRate();">
+                   <label for="uc1">Okay</label> 
+              <input type="radio" name="Ucleanr" 
+                      id="uc2" value="4" onclick="URClean(this.value);UpRate();">
+                   <label for="uc2">Good</label> 
+              <input type="radio" name="Ucleanr" 
+                      id="uc3" value="5" onclick="URClean(this.value);UpRate();">
+                   <label for="uc3">Excellent</label> 
+                   
+    </fieldset>
+        
+          <br><br>
+          <fieldset data-role="controlgroup" data-iconpos="right"   >
+        <b>Food Quality Rating*:</b>
+                   <input type="hidden" id="Uquality">
+       
+                   
+        <input type="radio" required name="Ufood"  
+      id= "f0" value="2"  onclick="URQuality(this.value);UpRate();">
+              <label for="f0">Need to Improve</label> 
+                   
+                   <input type="radio" name="Ufood" 
+                      id="f1" value="3" onclick="URQuality(this.value);UpRate();">
+                   <label for="f1">Okay</label> 
+              <input type="radio" name="Ufood" 
+                      id="f2" value="4" onclick="URQuality(this.value);UpRate();">
+                   <label for="f2">Good</label> 
+              <input type="radio" name="Ufood" 
+                      id="f3" value="5" onclick="URQuality(this.value);UpRate();">
+                   <label for="f3">Excellent</label> 
+                   
+    </fieldset>
+      <br> <br>
+        <p>
+          <b>Additonal Note</b><br>
+            
+          <textarea id = "Unote" 
+                  rows = "15"
+                  cols = "90">
+            </textarea>
+        </p>
+          <p>
+          <b>Your Good Name*</b><br>
+            
+          <input type = "text" required
+                  id = "Ureperson"
+                   pattern="[a-zA-Z\s]+" minlength="3" maxlength="20"
+                 placeholder="input your name here"
+                  value = "" 
+                 > <span> </span>
+        </p>
+                   
+        <p>
+          <b>Report</b><br>
+            
+          <textarea id = "report"  
+                  rows = "15"
+                  cols = "90">
+            </textarea>
+        </p>
+            <input type="submit" value="Update"  />
+          <input  type="hidden" id="Uaverage"/>
+                  
+            </form>
+                 
+             </div>
+             </div>
+       
+             
+      </div>  
+         
+    </body>
+   
+    
+    
+    
+
+    <script>
+     
+     //not to clear the form whent he submit button is pressed
+        document.getElementById("dataform").addEventListener("submit",function (e){
+      e.preventDefault()
+     })
+        
+        //passing the value to the ids after getting the value from radio button
+   
+        function RClean(Cleanliness){
+            document.getElementById("clean").value=Cleanliness;
+        }
+        
+        
+        function RService(service) {
+  document.getElementById("ser").value = service;
+}
+        function RQuality(food){
+            document.getElementById("quality").value=food;
+        }
+            
+          //calculating average  
+        function avgrate(){
+            var s=parseInt(document.getElementById("ser").value);
+            var c= parseInt(document.getElementById("clean").value);
+            var q=parseInt(document.getElementById("quality").value);
+            var  avg=((s+c+q)/3);
+            var roundavg=Math.round(avg);
+            document.getElementById("average").value=roundavg;
+        }
+        
+//functions for update : getting values for radio button
+        
+       function URService(Uservice) {
+  document.getElementById("Udser").value = Uservice;
+}
+        function URClean(UCleanliness){
+            document.getElementById("Uclean").value=UCleanliness;
+        }
+        
+      function URQuality(Ufood){
+          document.getElementById("Uquality").value=Ufood;
+    } 
+      
+
+        //calculating average when update
+        function UpRate(){
+            var us=parseInt(document.getElementById("Udser").value);
+            var uc= parseInt(document.getElementById("Uclean").value);
+            var uq=parseInt(document.getElementById("Uquality").value);
+            var  Uavg=((us+uc+uq)/3);
+            var roundUavg=Math.round(Uavg);
+            document.getElementById("Uaverage").value=roundUavg;
+        }
+  
+       
+        
+    </script>
+   
+
+</html>
